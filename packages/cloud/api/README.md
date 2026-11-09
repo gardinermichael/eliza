@@ -149,6 +149,16 @@ bun run --cwd packages/cloud/api build  # build
 bun run --cwd packages/cloud/api test   # tests
 ```
 
+If the TypeScript build fails with a JavaScript heap out-of-memory error, retry
+with an 8 GiB Node.js heap limit. Run from the repository root:
+
+```bash
+NODE_OPTIONS=--max-old-space-size=8192 bun run --cwd packages/cloud/api build
+```
+
+This setting applies to this command and its Node.js child processes. It does
+not reserve 8 GiB or change the deployed Worker's memory limit.
+
 ## Independent native App Auth clients
 
 `ELIZA_MOBILE_APP_AUTH_CLIENTS_JSON` optionally registers additional native clients.

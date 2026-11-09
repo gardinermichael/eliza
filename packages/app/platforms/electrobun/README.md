@@ -19,3 +19,15 @@ point. The first build needs `curl`, `tar`, `patch`, `cmake`, and `g++`, and dow
 the verified CEF SDK; subsequent builds reuse its checked cache. Set
 `ELIZA_DESKTOP_CEF_HELPER_CACHE` to select that build cache. The helper wrapper
 compiles with one job; no download or compilation occurs when the app starts.
+
+On macOS, if the Electrobun 1.18.1 CLI is killed at launch and the build later
+fails with `No macOS .app bundle found`, check the installed CLI's code signature.
+For a trusted installation with an invalid signature, re-sign both installed
+copies ad hoc (without a signing certificate), then build again. Run from the
+repository root. Repeat after a reinstall if the signature failure returns:
+
+```bash
+for f in node_modules/.bun/electrobun@*/node_modules/electrobun/{bin,.cache}/electrobun; do
+  [ -f "$f" ] && codesign --force --sign - "$f"
+done
+```
