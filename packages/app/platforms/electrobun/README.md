@@ -2,6 +2,37 @@
 
 Native desktop shell for the elizaOS app on macOS, Windows, and Linux.
 
+## Launch the desktop app
+
+On an Apple Silicon Mac, open an existing development build from the repository
+root:
+
+```bash
+open packages/app/platforms/electrobun/build/dev-macos-arm64/Eliza-dev.app
+```
+
+You can also double-click `Eliza-dev.app` in Finder. If the app bundle is missing
+or you changed the source, build it first:
+
+```bash
+bun run --cwd packages/app/platforms/electrobun build
+```
+
+For a fresh checkout, use Bun 1.4.2 and Node.js 24.15.0, then run `bun install`
+from the repository root before building. See the signing workaround below if
+the macOS build fails with `No macOS .app bundle found`.
+
+To run the desktop shell in development mode:
+
+```bash
+bun run --cwd packages/app/platforms/electrobun dev
+```
+
+To run the app UI and API through the repository's source launcher instead,
+run `bun run dev` from the root. Use `bun run dev:local` for local-agent or
+direct-provider setup without Cloud sign-in. Follow the terminal's startup
+instructions and keep that terminal open; press Ctrl+C to stop it.
+
 ## Development
 
 Install dependencies with `bun install` at the repository root. Run from that root:
